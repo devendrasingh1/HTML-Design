@@ -186,42 +186,6 @@
 	    sync1.data('owl.carousel').to(number, 300, true);
 	  });
 	});
-	//header_carousel carousel
-	if ($(".header_carousel").length > 0) {
-		$(".header_carousel").owlCarousel({
-			mode:"fade",
-			items:9,
-			loop:true,
-			margin:5,
-			autoplay:false,
-			autoplayTimeout:3000,
-			autoplaySpeed:1500,
-			smartSpeed:1500,
-			dots:false,
-			nav:true,
-			navText: ['<i class="fas fa-chevron-left"></i>','<i class="fas fa-chevron-right"></i>'],
-			responsive:{
-				0:{
-		            items:2
-		        },
-		        320:{
-		            items:3
-		        },
-		        480:{
-		            items:4
-		        },
-		        767:{
-		            items:5
-		        },
-		        992:{
-		            items:7
-		        },
-		        1199:{
-		            items:9
-		        }
-		    }
-		});
-	}
 	//home slider
 	if ($(".home_slider").length > 0) {
 		$(".home_slider").owlCarousel({
@@ -297,6 +261,70 @@
 	    $( "#amount" ).val(+ $( ".range_slider" ).slider( "values", 0 ) +
 	      " - " + $( ".range_slider" ).slider( "values", 1 ) );
 	  });
+	  
+	//fix search sidebar on scroll
+	var sidebar = $('.right_search_sidebar');
+	var sidebar_top = sidebar.offset().top;
+    $(window).scroll(function () {
+        var w_scroll = $(window).scrollTop();
+        if (w_scroll >=sidebar_top & w_scroll <=1500) {
+            sidebar.addClass("sidebar_fix");
+        } 
+		else{
+            sidebar.removeClass("sidebar_fix");
+        } 
+    });
+	//Append input field on click
+	var ad = 1;
+	$('.add_on_btn').on('click', function(){
+		ad++;
+		var html = '<div class="addons_form_row" id="add_row'+ad+'">\
+						<div class="row">\
+							<div class="col-md-6 col-12">\
+								<div class="form_group">\
+									<div class="input_group">\
+										<input type="text" placeholder="Enter Title" class="form-control" name="titlee[]">\
+									</div>\
+								</div>\
+							</div>\
+							<div class="col-md-3 col-12">\
+								<div class="form_group">\
+									<div class="input_group">\
+										<input type="text" placeholder="Enter Price" class="form-control" name="pricee[]">\
+									</div>\
+								</div>\
+							</div>\
+							<div class="col-md-3 col-12">\
+								<div class="form_group">\
+									<div class="input_group">\
+										<select class="form-control" name="days[]">\
+										  <option value="">Select Delivery Days</option>\
+										  <option value="1">1</option>\
+										  <option value="2">2</option>\
+										  <option value="3">3</option>\
+										  <option value="4">4</option>\
+										  <option value="5">5</option>\
+										</select>\
+									</div>\
+								</div>\
+							</div>\
+						</div>\
+						<span class="row_btns remove_row_btn" id="btn'+ad+'"><i class="fas fa-minus"></i></span>\
+					</div>';
+		$('.addons_form_wrap').append(html);
+	});
+	//remove field
+	$(document).on('click', '.remove_row_btn', function(){
+		//var button_id = $(this).attr("id");
+		var remove_prnt = $(this).parents(".addons_form_row");
+		$(remove_prnt).remove();
+	});
+	//file upload js
+	$('#file_upload_new').change(function() {
+	  var i = $(this).prev('.custom_file_upload').clone();
+	  var file = $('#file_upload_new')[0].files[0].name;
+	  $(this).prev('.custom_file_upload').html('<i class="fa fa-cloud-upload"></i>'+file);
+	});
 })(jQuery);
 //copy to clip board on click
 function copybutton() {
