@@ -24,6 +24,12 @@ img{
 .bg_gray{
     background: #f0f0f0;
 }
+.preview_img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
 /*=== custom select css ===*/
 .custom_select {
     display: inline-block;

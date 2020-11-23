@@ -263,17 +263,17 @@
 	  });
 	  
 	//fix search sidebar on scroll
-	var sidebar = $('.right_search_sidebar');
-	var sidebar_top = sidebar.offset().top;
-    $(window).scroll(function () {
-        var w_scroll = $(window).scrollTop();
-        if (w_scroll >=sidebar_top & w_scroll <=1500) {
-            sidebar.addClass("sidebar_fix");
-        } 
-		else{
-            sidebar.removeClass("sidebar_fix");
-        } 
-    });
+	// var sidebar = $('.right_search_sidebar');
+	// var sidebar_top = sidebar.offset().top;
+    // $(window).scroll(function () {
+        // var w_scroll = $(window).scrollTop();
+        // if (w_scroll >=sidebar_top & w_scroll <=1500) {
+            // sidebar.addClass("sidebar_fix");
+        // } 
+		// else{
+            // sidebar.removeClass("sidebar_fix");
+        // } 
+    // });
 	//Append input field on click
 	var ad = 1;
 	$('.add_on_btn').on('click', function(){
@@ -324,6 +324,21 @@
 	  var i = $(this).prev('.custom_file_upload').clone();
 	  var file = $('#file_upload_new')[0].files[0].name;
 	  $(this).prev('.custom_file_upload').html('<i class="fa fa-cloud-upload"></i>'+file);
+	});
+	//preview image before upload
+	function readURL(input) {
+	  if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		
+		reader.onload = function(e) {
+		  $('.preview_img').attr('src', e.target.result);
+		}
+		
+		reader.readAsDataURL(input.files[0]); // convert to base64 string
+	  }
+	}
+	$(".prev_img_input").change(function() {
+	  readURL(this);
 	});
 })(jQuery);
 //copy to clip board on click
